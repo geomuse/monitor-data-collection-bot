@@ -1,0 +1,11 @@
+2023-07-03 17:59:10.167 | get() missing 1 required positional argument: 'url'
+2023-07-03 18:01:03.345 | tuple index out of range
+2023-07-03 18:01:51.145 | tuple index out of range
+2023-07-03 18:02:40.510 | tuple index out of range
+2023-07-03 18:33:54.644 | HTTPSConnectionPool(host='checkip.amazonaws.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fe34ab50c10>: Failed to establish a new connection: Socket error: 400: Bad Request\n\n[*] Note: The HTTP proxy server may not be supported by PySocks (must be a CONNECT tunnel proxy)'))
+2023-07-03 18:36:19.777 | HTTPSConnectionPool(host='checkip.amazonaws.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f7225254c10>: Failed to establish a new connection: Socket error: [Errno 104] Connection reset by peer'))
+2023-07-03 18:41:04.837 | HTTPSConnectionPool(host='checkip.amazonaws.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:997)')))
+2023-07-03 18:45:54.727 | HTTPSConnectionPool(host='checkip.amazonaws.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:997)')))
+2023-07-03 18:49:20.993 | HTTPSConnectionPool(host='checkip.amazonaws.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:997)')))
+2023-07-03 21:58:51.709 | SOCKSHTTPSConnectionPool(host='checkip.amazonaws.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x7fb87eaad270>, 'Connection to checkip.amazonaws.com timed out. (connect timeout=None)'))
+2023-07-03 22:07:42.141 | SOCKSHTTPSConnectionPool(host='checkip.amazonaws.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x7fb87eaadf60>, 'Connection to checkip.amazonaws.com timed out. (connect timeout=None)'))
