@@ -26,11 +26,12 @@ class monitor_proxy_server:
     def __generate_proxy_server(self):
         proxy_list = pd.read_csv('socks5_proxies.txt',header=None)
         proxy_list[0] = proxy_list[0].apply(lambda text : str(text).split(":"))
-        proxy_ips, proxy_ports = [] , []
+        proxy = []
         for _ in range(len(proxy_list)):
-            proxy_ip , proxy_port = proxy_list[0][_]
-            proxy_ips.append(proxy_ip) , proxy_ports.append(int(proxy_port))
-        return proxy_ips , proxy_ports
+            ip , port = proxy_list[0][_]
+            port = int(port)
+            proxy.append((ip,port))
+        return proxy
 
     def session_initial(self,proxy):
         ip , port = proxy
@@ -62,31 +63,29 @@ class monitor_proxy_server:
         else : 
             print(f'请求失败,status.code : {response.status_code}')
 
-    def check_response_time(self,start,end):
-        response_time = end - start
-        print('请求响应时间:', response_time)
-        return response_time
+    # def check_response_time(self,start,end):
+    #     response_time = end - start
+    #     print('请求响应时间:', response_time)
+    #     return response_time
     
     def requests_check_the_proxy_server(self):
-        proxy_ip , proxy_port = self.__generate_proxy_server()
-        support_proxy = []
-        for ip , port in zip(proxy_ip,proxy_port):
+        proxy = self.__generate_proxy_server()
+        support_proxy , count = [] , 0 
+        for ip , port in proxy:
             session = self.session_initial((ip,port))
-            time.sleep(5)
+            time.sleep(3)
             try :
-                start = time.time()
+                # start = time.time()
                 try :
                     response = session.get('https://checkip.amazonaws.com/')
                 except Exception as e :
                     continue
-                end = time.time()
+                # end = time.time()
                 response = self.check_response(response=response)
                 if response : 
-                    response_time = self.check_response_time(start=start,end=end)
-                    if response_time < 15 :
-                        print(f'{ip} have been mark.')
-                        support_proxy.append((ip,port))
-                
+                    print(f'{ip} have been mark.')
+                    support_proxy.append((ip,port))
+                # self.check_response_time(start=start,end=end)
             except Exception as e : 
                 logger.error(f'{e}')
 
@@ -118,6 +117,7 @@ class anti_ws_bot(ws_bot):
             method_whitelist=["HEAD", "GET", "OPTIONS"]
         )
         session = requests.Session()
+        session.timeout = 10
         adapter = HTTPAdapter(max_retries=retry_strategy)
         session.mount("http://", adapter)
         session.mount("https://", adapter)
